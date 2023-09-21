@@ -1,10 +1,16 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import { BiEdit } from "react-icons/bi";
 import coverImage from "../../../../public/images/cover.jpeg";
 import { stringSplit } from "@/util/helper";
+import { useRouter, usePathname } from "next/navigation";
 
 const blog = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const blogId = pathname.split("blog/")[1];
+
   const data = {
     title:
       "Lorem Ipsum is simply dummy text of the printing text of the printing",
@@ -25,7 +31,10 @@ const blog = () => {
         </div>
         <div className="text-xs font-bold mb-3 text-black">{data.author}</div>
         <div className="flex justify-center">
-          <button className="flex items-center space-x-2 bg-gray-700 py-2 px-4 rounded-md text-white text-sm">
+          <button
+            className="flex items-center space-x-2 bg-gray-700 py-2 px-4 rounded-md text-white text-sm"
+            onClick={() => router.push(`/editBlog/${blogId}`)}
+          >
             <BiEdit />
 
             <span>Edit this post</span>
