@@ -18,6 +18,10 @@ const BlogSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    author: {
+        type: String,
+        required: true,
+    },
     coverImage: {
         data: Buffer,
         contentType: String,
@@ -25,6 +29,6 @@ const BlogSchema = new mongoose.Schema({
 
 }, { timestamps: true });
 
-const Blog = mongoose.model("Blog", BlogSchema);
+const Blog = mongoose.models.Blog || mongoose.model("Blog", BlogSchema);
 
 module.exports = Blog;

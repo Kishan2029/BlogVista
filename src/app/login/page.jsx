@@ -5,8 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useRouter } from "next/navigation";
 
 const login = () => {
-  const { status } = useSession();
-  console.log("Inlogin");
+  const { data, status } = useSession();
 
   const router = useRouter();
 

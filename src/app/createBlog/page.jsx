@@ -3,16 +3,39 @@ import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const createBlog = () => {
+  const { data, status } = useSession();
+
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [image, setImage] = useState("");
   const [content, setContent] = useState("");
 
-  const saveBlog = () => {
+  const createBlogFunction = async () => {
+    const body = {
+      title,
+      summary,
+      content,
+      id: data.user.id,
+    };
+    console.log("body", body);
+    const res = await fetch("/api/blogs", {
+      method: "POST",
+      body: JSON.stringify(body),
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log("res", res);
+  };
+
+  const saveBlog = async () => {
     console.log(title, summary, content);
+    await createBlogFunction();
     router.push("/");
   };
   return (
