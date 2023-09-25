@@ -3,6 +3,7 @@ import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useRouter, useSearchParams } from "next/navigation";
+import { editBlogFunction } from "@/actions/serverActions";
 
 async function getBlog(id) {
   const res = await fetch(`http://localhost:3000/api/blogs/${id}`, {
@@ -27,27 +28,14 @@ const editBlog = ({ params: { id } }) => {
   const [image, setImage] = useState("");
   const [content, setContent] = useState("");
 
-  const editBlogFunction = async (id) => {
-    const body = {
+  const updateBlog = async () => {
+    console.log(title, summary, content);
+    await editBlogFunction({
       title,
       summary,
       content,
       blogId: id,
-    };
-    console.log("body", body);
-    const res = await fetch("/api/blogs", {
-      method: "PUT",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-      },
     });
-    console.log("res", res);
-  };
-
-  const updateBlog = async () => {
-    console.log(title, summary, content);
-    await editBlogFunction(id);
     router.push("/");
   };
 

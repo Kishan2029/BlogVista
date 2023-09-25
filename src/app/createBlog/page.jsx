@@ -4,6 +4,8 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { revalidateTag } from "next/cache";
+import { createBlogFunction } from "@/actions/serverActions";
 
 const createBlog = () => {
   const { data, status } = useSession();
@@ -14,27 +16,33 @@ const createBlog = () => {
   const [image, setImage] = useState("");
   const [content, setContent] = useState("");
 
-  const createBlogFunction = async () => {
-    const body = {
+  // const createBlogFunction = async () => {
+  //   const body = {
+  //     title,
+  //     summary,
+  //     content,
+  //     id: data.user.id,
+  //   };
+  //   console.log("body", body);
+  //   const res = await fetch("/api/blogs", {
+  //     method: "POST",
+  //     body: JSON.stringify(body),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+  //   // revalidateTag("blogs");
+  //   console.log("res", res);
+  // };
+
+  const saveBlog = async () => {
+    console.log(title, summary, content);
+    await createBlogFunction({
       title,
       summary,
       content,
       id: data.user.id,
-    };
-    console.log("body", body);
-    const res = await fetch("/api/blogs", {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-      },
     });
-    console.log("res", res);
-  };
-
-  const saveBlog = async () => {
-    console.log(title, summary, content);
-    await createBlogFunction();
     router.push("/");
   };
   return (

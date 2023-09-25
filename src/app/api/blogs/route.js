@@ -1,6 +1,7 @@
 import User from '@/models/User';
 import Blog from "@/models/Blog";
 import connectDB from "@/config/db";
+import { revalidateTag } from 'next/cache';
 // const Blog = require("../../../models/Blog")
 
 
@@ -26,6 +27,7 @@ export const GET = async (request) => {
 export const POST = async (request) => {
 
     try {
+
         await connectDB();
 
 
@@ -45,6 +47,7 @@ export const POST = async (request) => {
         console.log("newBlog", newBlog)
         await newBlog.save();
         console.log("Blog is created");
+        revalidateTag('blogs')
         // return new Response("success")
         return new Response(JSON.stringify({
             data: newBlog, notification: {

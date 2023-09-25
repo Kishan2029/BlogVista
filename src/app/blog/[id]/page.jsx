@@ -6,6 +6,7 @@ import coverImage from "../../../../public/images/cover.jpeg";
 import { stringSplit } from "@/util/helper";
 import { useRouter, useSearchParams } from "next/navigation";
 import ReactHtmlParser from "react-html-parser";
+import parse from "html-react-parser";
 
 async function getBlog(id) {
   const res = await fetch(`http://localhost:3000/api/blogs/${id}`, {
@@ -71,13 +72,18 @@ const blog = async ({ params: { id } }) => {
       />
 
       <div className="mt-6">
-        {stringSplit(data.content).map((item) => {
+        <div className="mb-6 text-base  text-slate-600 leading-relaxed">
+          {/* {ReactHtmlParser(data.content)} */}
+          {parse(data.content)}
+          {/* <div dangerouslySetInnerHTML={{ __html: data.content }} /> */}
+        </div>
+        {/* {stringSplit(data.content).map((item) => {
           return (
             <div className="mb-6 text-base  text-slate-600 leading-relaxed">
               {ReactHtmlParser(item)}
             </div>
           );
-        })}
+        })} */}
       </div>
     </div>
   );
