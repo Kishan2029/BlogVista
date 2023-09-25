@@ -2,9 +2,10 @@ import BlogRow from "@/components/BlogRow";
 
 async function getBlogs() {
   const res = await fetch("http://localhost:3000/api/blogs", {
-    next: { revalidate: 1 },
+    cache: "no-store",
+    // next: { revalidate: 5 },
   });
-  console.log("response", res);
+
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
@@ -48,7 +49,7 @@ export default async function Home() {
   ];
 
   const { data: blogs } = await getBlogs();
-  console.log("blogs", blogs);
+  // console.log("blogs", blogs);
 
   return (
     <div className="mt-5">
@@ -63,6 +64,7 @@ export default async function Home() {
               summary={item.summary}
               content={item.content}
               time={item.createdAt}
+              blogId={item._id}
             />
           );
         })}

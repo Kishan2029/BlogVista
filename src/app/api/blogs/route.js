@@ -10,7 +10,7 @@ export const GET = async (request) => {
         await connectDB();
 
         const blogs = await Blog.find();
-        console.log("blog api", blogs)
+        // console.log("blog api", blogs)
 
 
         return new Response(JSON.stringify({
@@ -58,13 +58,18 @@ export const POST = async (request) => {
 }
 
 export const PUT = async (request) => {
+    console.log("Inside PUT request")
     try {
         await connectDB();
 
-        const { title, description, summary, coverImage, blogId } = await request.json();
+        const { title, content, summary, coverImage, blogId } = await request.json();
+        console.log("Hello deer")
+
+        console.log("data", title, content, summary, coverImage, blogId)
         const getBlog = await Blog.findById(blogId);
+        console.log("getBlog", getBlog)
         getBlog.title = title;
-        getBlog.description = description;
+        getBlog.content = content;
         getBlog.summary = summary;
 
         await getBlog.save();

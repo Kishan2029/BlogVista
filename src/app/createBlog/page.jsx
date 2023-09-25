@@ -25,7 +25,6 @@ const createBlog = () => {
     const res = await fetch("/api/blogs", {
       method: "POST",
       body: JSON.stringify(body),
-
       headers: {
         "Content-Type": "application/json",
       },
