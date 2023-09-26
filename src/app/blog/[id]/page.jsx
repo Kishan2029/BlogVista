@@ -7,6 +7,7 @@ import { stringSplit } from "@/util/helper";
 import { useRouter, useSearchParams } from "next/navigation";
 import ReactHtmlParser from "react-html-parser";
 import parse from "html-react-parser";
+import { preload } from "swr";
 
 async function getBlog(id) {
   const res = await fetch(`http://localhost:3000/api/blogs/${id}`, {
@@ -21,6 +22,11 @@ async function getBlog(id) {
 
   return res.json();
 }
+
+const fetcher = (url) =>
+  fetch(url).then((res) => {
+    return res.json();
+  });
 
 const blog = async ({ params: { id } }) => {
   const router = useRouter();
@@ -56,6 +62,10 @@ const blog = async ({ params: { id } }) => {
               //   query: { keyword: "this way" },
               // })
             }
+            onMouseOver={() => {
+              console.log("blue");
+              preload(`http://localhost:3000/api/blogs/${id}`, fetcher);
+            }}
           >
             <BiEdit />
 

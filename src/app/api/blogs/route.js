@@ -2,7 +2,8 @@ import User from '@/models/User';
 import Blog from "@/models/Blog";
 import connectDB from "@/config/db";
 import { revalidateTag } from 'next/cache';
-// const Blog = require("../../../models/Blog")
+
+
 
 
 export const GET = async (request) => {
@@ -28,8 +29,9 @@ export const POST = async (request) => {
 
     try {
 
-        await connectDB();
+        // upload an image
 
+        await connectDB();
 
         const { title, content, summary, coverImage, id } = await request.json();
 
@@ -86,3 +88,4 @@ export const PUT = async (request) => {
         return new Response("Failed to fetch all blogs", { status: 500 })
     }
 }
+

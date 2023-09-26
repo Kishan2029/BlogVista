@@ -1,26 +1,23 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useRouter, useSearchParams } from "next/navigation";
 import { editBlogFunction } from "@/actions/serverActions";
+import useSWR from "swr";
 
-async function getBlog(id) {
-  const res = await fetch(`http://localhost:3000/api/blogs/${id}`, {
-    // cache: "no-cache",
-    // next: { revalidate: 5 },
+const fetcher = (url) =>
+  fetch(url).then((res) => {
+    return res.json();
   });
-  console.log("response", res);
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
 
 const editBlog = ({ params: { id } }) => {
   // const { data: blogData } = await getBlog(id);
+  const { data, error, isLoading } = useSWR(
+    `http://localhost:3000/api/blogs/${id}`,
+    fetcher
+  );
+  console.log("data", data);
   const router = useRouter();
 
   const [title, setTitle] = useState("");
@@ -39,6 +36,18 @@ const editBlog = ({ params: { id } }) => {
     router.push("/");
   };
 
+  useEffect(() => {
+    console.log("useData", data);
+    if (data !== undefined) {
+      console.log("inside", data);
+      setTitle(data.data.title);
+      setContent(data.data.content);
+      setSummary(data.data.summary);
+    }
+  }, [data]);
+
+  if (error) return <div>failed to load</div>;
+  if (isLoading) return <div>loading...</div>;
   return (
     <div className="flex-col space-y-4 ">
       <input
@@ -47,6 +56,7 @@ const editBlog = ({ params: { id } }) => {
         placeholder="Enter title"
         className="border-2 rounded-md px-2 py-1 w-full border-gray-400"
         onChange={(e) => setTitle(e.target.value)}
+        value={title}
       />
       <input
         type="text"
@@ -54,6 +64,7 @@ const editBlog = ({ params: { id } }) => {
         placeholder="Enter summary"
         className="border-2 rounded-md px-2 py-1 w-full border-gray-400"
         onChange={(e) => setSummary(e.target.value)}
+        value={summary}
       />
       <input
         type="file"
