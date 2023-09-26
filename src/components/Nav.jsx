@@ -13,7 +13,7 @@ const Nav = () => {
       <Link href="/">
         <div className="text-3xl font-bold">BlogVista</div>
       </Link>
-      <div className="flex space-x-12">
+      <div className="space-y-2  sm:flex sm:space-x-12  sm:items-center sm:space-y-0">
         {status === "authenticated" && (
           <Link href="/createBlog">
             <div>Create new blog</div>

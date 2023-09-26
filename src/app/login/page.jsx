@@ -19,9 +19,9 @@ const login = () => {
     }
   }, [status]);
   return (
-    <div className="flex justify-center mt-52">
+    <div className="flex justify-center items-center mt-80 sm:mt-52">
       <button
-        className="flex items-center space-x-2 bg-gray-600 py-2 px-4 rounded-md text-white text-base"
+        className="flex items-center space-x-2 bg-gray-600 py-2 px-4 rounded-md text-white text-base h-12"
         onClick={login}
       >
         <FcGoogle style={{ fontSize: "2rem" }} />

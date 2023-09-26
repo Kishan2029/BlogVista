@@ -2,8 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-.app {
-  padding: 120px 170px 160px 170px;
+/* .app {
+  padding: 90px 170px 160px 170px;
   width: 100vw;
   min-height: 100vh;
+} */
+
+/* Mobile Devices */
+@media (max-width: 767px) {
+  .app {
+    padding: 30px 22px 40px 22px;
+    width: 100vw;
+    min-height: 100vh;
+  }
+}
+
+/* Tablet Devices */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .app {
+    padding: 90px 90px 160px 90px;
+    width: 100vw;
+    min-height: 100vh;
+  }
+}
+
+/* Laptop and Desktop Devices */
+@media (min-width: 1024px) {
+  .app {
+    padding: 90px 170px 160px 170px;
+    width: 100vw;
+    min-height: 100vh;
+  }
 }
