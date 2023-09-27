@@ -9,7 +9,9 @@ import { notify } from "@/util/notify";
 
 const fetcher = (url) =>
   fetch(url).then((res) => {
-    return res.json();
+    setTimeout(() => {
+      return res.json();
+    }, 4000);
   });
 
 const editBlog = ({ params: { id } }) => {
