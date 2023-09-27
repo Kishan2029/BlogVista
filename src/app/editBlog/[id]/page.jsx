@@ -6,11 +6,18 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { editBlogFunction, deleteBlogFunction } from "@/actions/serverActions";
 import useSWR from "swr";
 import { notify } from "@/util/notify";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import EditLoader from "@/components/EditLoader";
 
 const fetcher = (url) =>
   fetch(url).then((res) => {
-    setTimeout(() => {
+    function temp() {
       return res.json();
+    }
+    setTimeout(() => {
+      temp();
+      console.log("Hello");
     }, 4000);
   });
 
@@ -57,7 +64,7 @@ const editBlog = ({ params: { id } }) => {
   }, [data]);
 
   if (error) return <div>failed to load</div>;
-  if (isLoading) return <div>loading...</div>;
+  if (isLoading) return <EditLoader />;
   return (
     <div className="flex-col space-y-4 ">
       <input
