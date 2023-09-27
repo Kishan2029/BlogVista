@@ -7,7 +7,7 @@ import { revalidateTag } from 'next/cache';
 
 
 export const GET = async (request) => {
-    console.log("inside get blog")
+
     try {
         await connectDB();
 

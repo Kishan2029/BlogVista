@@ -72,10 +72,11 @@ const createBlog = () => {
           theme="snow"
           value={content}
           onChange={setContent}
-          className="h-60"
+          style={{ height: "20rem" }}
         />
       </div>
-      <div>
+      <div className="h-30 text-white sm:hidden">x</div>
+      <div className="flex space-x-6">
         <button
           className="mt-12 bg-sky-600 px-4 py-2 text-white rounded-md text-md"
           onClick={saveBlog}

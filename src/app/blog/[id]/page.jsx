@@ -32,6 +32,7 @@ const blog = async ({ params: { id } }) => {
   const router = useRouter();
 
   const { data } = await getBlog(id);
+  console.log("data", data);
 
   // const data = {
   //   title:
@@ -47,9 +48,9 @@ const blog = async ({ params: { id } }) => {
     <div>
       {/* Title bar */}
       <div className="text-center mb-5">
-        <div className="text-3xl font-semibold"> {data.title}</div>
+        <div className="text-xl sm:text-3xl font-medium"> {data.title}</div>
         <div className="text-xs font-normal mt-2 mb-1 text-slate-600">
-          {data.time}
+          {data.createdAt}
         </div>
         <div className="text-xs font-bold mb-3 text-black">{data.author}</div>
         <div className="flex justify-center">

@@ -29,3 +29,16 @@ export const editBlogFunction = async (body) => {
     revalidateTag("blogs");
     console.log("res", res);
 };
+
+export const deleteBlogFunction = async (id) => {
+
+    console.log("Inside deleteBlog front")
+    const res = await fetch(`http://localhost:3000/api/blogs/${id}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    revalidateTag("blogs");
+    // console.log("res", res);
+};

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useRouter, useSearchParams } from "next/navigation";
-import { editBlogFunction } from "@/actions/serverActions";
+import { editBlogFunction, deleteBlogFunction } from "@/actions/serverActions";
 import useSWR from "swr";
 
 const fetcher = (url) =>
@@ -17,7 +17,7 @@ const editBlog = ({ params: { id } }) => {
     `http://localhost:3000/api/blogs/${id}`,
     fetcher
   );
-  console.log("data", data);
+
   const router = useRouter();
 
   const [title, setTitle] = useState("");
@@ -26,13 +26,18 @@ const editBlog = ({ params: { id } }) => {
   const [content, setContent] = useState("");
 
   const updateBlog = async () => {
-    console.log(title, summary, content);
     await editBlogFunction({
       title,
       summary,
       content,
       blogId: id,
     });
+    router.push("/");
+  };
+
+  const deleteBlog = async () => {
+    await deleteBlogFunction(id);
+    console.log("after math");
     router.push("/");
   };
 
@@ -77,15 +82,22 @@ const editBlog = ({ params: { id } }) => {
           theme="snow"
           value={content}
           onChange={setContent}
-          className="h-60"
+          style={{ height: "20rem" }}
         />
       </div>
-      <div>
+      <div className="h-30 text-white sm:hidden">x</div>
+      <div className="flex space-x-6">
         <button
           className="mt-12 bg-sky-600 px-4 py-2 text-white rounded-md text-md"
           onClick={updateBlog}
         >
           Update Blog
+        </button>
+        <button
+          className="mt-12 bg-red-500 px-4 py-2 text-white rounded-md text-md"
+          onClick={deleteBlog}
+        >
+          Delete Blog
         </button>
       </div>
     </div>
