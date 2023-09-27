@@ -1,5 +1,6 @@
 "use server"
 
+import { notify } from "@/util/notify";
 import { revalidateTag } from "next/cache";
 
 export const createBlogFunction = async (body) => {
@@ -12,8 +13,11 @@ export const createBlogFunction = async (body) => {
             "Content-Type": "application/json",
         },
     });
+    const { notification } = await res.json()
+    console.log("res",);
     revalidateTag("blogs");
-    console.log("res", res);
+
+
 };
 
 export const editBlogFunction = async (body) => {

@@ -49,7 +49,7 @@ export const POST = async (request) => {
         console.log("newBlog", newBlog)
         await newBlog.save();
         console.log("Blog is created");
-        revalidateTag('blogs')
+        // revalidateTag('blogs')
         // return new Response("success")
         return new Response(JSON.stringify({
             data: newBlog, notification: {

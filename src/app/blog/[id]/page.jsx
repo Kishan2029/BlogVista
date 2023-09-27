@@ -62,7 +62,7 @@ const blog = async ({ params: { id } }) => {
             >
               <BiEdit />
 
-              <span>Edit this post</span>
+              <span>Edit this blog</span>
             </button>
           </div>
         )}

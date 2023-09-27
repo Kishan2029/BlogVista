@@ -5,6 +5,7 @@ import "react-quill/dist/quill.snow.css";
 import { useRouter, useSearchParams } from "next/navigation";
 import { editBlogFunction, deleteBlogFunction } from "@/actions/serverActions";
 import useSWR from "swr";
+import { notify } from "@/util/notify";
 
 const fetcher = (url) =>
   fetch(url).then((res) => {
@@ -33,12 +34,14 @@ const editBlog = ({ params: { id } }) => {
       blogId: id,
     });
     router.push("/");
+    notify("success", "Blog is updated");
   };
 
   const deleteBlog = async () => {
     await deleteBlogFunction(id);
     console.log("after math");
     router.push("/");
+    notify("success", "Blog is deleted");
   };
 
   useEffect(() => {
@@ -62,6 +65,7 @@ const editBlog = ({ params: { id } }) => {
         className="border-2 rounded-md px-2 py-1 w-full border-gray-400"
         onChange={(e) => setTitle(e.target.value)}
         value={title}
+        maxLength={150}
       />
       <input
         type="text"
@@ -70,6 +74,7 @@ const editBlog = ({ params: { id } }) => {
         className="border-2 rounded-md px-2 py-1 w-full border-gray-400"
         onChange={(e) => setSummary(e.target.value)}
         value={summary}
+        maxLength={350}
       />
       <input
         type="file"

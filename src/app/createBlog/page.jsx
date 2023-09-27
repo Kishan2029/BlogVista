@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { revalidateTag } from "next/cache";
 import { createBlogFunction } from "@/actions/serverActions";
+import { notify } from "@/util/notify";
 
 const createBlog = () => {
   const { data, status } = useSession();
@@ -37,13 +38,19 @@ const createBlog = () => {
 
   const saveBlog = async () => {
     console.log(title, summary, content);
-    await createBlogFunction({
-      title,
-      summary,
-      content,
-      id: data.user.id,
-    });
-    router.push("/");
+    if (title === "" || summary === "" || content === "") {
+      console.log("Helo");
+      notify("error", "Title, summary or content cannot be empty.");
+    } else {
+      await createBlogFunction({
+        title,
+        summary,
+        content,
+        id: data.user.id,
+      });
+      router.push("/");
+      notify("success", "Blog is created");
+    }
   };
   return (
     <div className="flex-col space-y-4 ">
@@ -53,6 +60,7 @@ const createBlog = () => {
         placeholder="Enter title"
         className="border-2 rounded-md px-2 py-1 w-full border-gray-400"
         onChange={(e) => setTitle(e.target.value)}
+        maxLength={150}
       />
       <input
         type="text"
@@ -60,6 +68,7 @@ const createBlog = () => {
         placeholder="Enter summary"
         className="border-2 rounded-md px-2 py-1 w-full border-gray-400"
         onChange={(e) => setSummary(e.target.value)}
+        maxLength={350}
       />
       <input
         type="file"
