@@ -4,8 +4,8 @@ import SingleBlog from "@/components/SingleBlog";
 
 async function getBlog(id) {
   const res = await fetch(`http://localhost:3000/api/blogs/${id}`, {
-    // cache: "no-cache",
-    // next: { revalidate: 5 },
+    cache: "no-cache",
+    next: { revalidate: 60 },
   });
 
   if (!res.ok) {
