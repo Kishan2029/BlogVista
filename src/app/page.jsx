@@ -2,11 +2,11 @@ import BlogRow from "@/components/BlogRow";
 
 async function getBlogs() {
   const res = await fetch("http://localhost:3000/api/blogs", {
-    // cache: "no-cache",
+    cache: "no-cache",
     next: {
       tags: ["blogs"],
     },
-    // next: { revalidate: 5 },
+    next: { revalidate: 100 },
   });
 
   if (!res.ok) {

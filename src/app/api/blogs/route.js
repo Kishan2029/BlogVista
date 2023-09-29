@@ -2,6 +2,7 @@ import User from '@/models/User';
 import Blog from "@/models/Blog";
 import connectDB from "@/config/db";
 import { revalidateTag } from 'next/cache';
+import { formatDateToDayMonthYear } from '@/libs/helper/helper';
 
 
 
@@ -11,8 +12,16 @@ export const GET = async (request) => {
     try {
         await connectDB();
 
-        const blogs = await Blog.find();
-        // console.log("blog api", blogs)
+        let blogs = await Blog.find();
+        blogs = blogs.map((item) => {
+            return {
+                ...item._doc,
+                createdAt: formatDateToDayMonthYear(item.createdAt)
+            }
+
+        })
+
+        console.log("blog api", blogs)
 
 
         return new Response(JSON.stringify({
