@@ -6,7 +6,7 @@ async function getBlogs() {
     next: {
       tags: ["blogs"],
     },
-    next: { revalidate: 100 },
+    // next: { revalidate: 100 },
   });
 
   if (!res.ok) {
