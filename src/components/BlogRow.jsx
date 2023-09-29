@@ -8,7 +8,6 @@ import { stringConcat } from "@/util/helper";
 const BlogRow = ({ title, time, author, summary, blogId }) => {
   // const width = window.innerWidth;
   return (
-    // <Link href="/blog/2">
     <div className="flex flex-col space-y-4 cursor-pointer sm:flex-row sm:space-y-0  sm:space-x-10">
       <div className="basis-2/5">
         <Link href={`/blog/${blogId}`}>
@@ -17,11 +16,11 @@ const BlogRow = ({ title, time, author, summary, blogId }) => {
             alt="cover image"
             // height={400}
             style={{ objectFit: "cover", height: "260px", width: "100%" }}
+            priority={true}
           />
         </Link>
       </div>
       <div className="basis-3/5">
-        {/* <div className=""> */}
         <Link href={`/blog/${blogId}`}>
           <div className="text-3xl font-medium hidden lg:block">
             {stringConcat(title, 64)}
