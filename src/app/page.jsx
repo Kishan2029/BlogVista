@@ -18,39 +18,6 @@ async function getBlogs() {
 }
 
 export default async function Home() {
-  const data = [
-    {
-      title:
-        "Lorem Ipsum is simply dummy text of the printing text of the printing",
-      author: "Kishan",
-      summary:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-      time: "22:00:00",
-    },
-    {
-      title:
-        "Lorem Ipsum is simply dummy text of the printing text of the printing",
-      author: "Kishan",
-      summary:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-      time: "22:00:00",
-    },
-    {
-      title: "Lorem Ipsum is simply dummy text of the printing ",
-      author: "Kishan",
-      summary:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-      time: "22:00:00",
-    },
-    {
-      title: "Lorem Ipsum is simply dummy text of the printing  ",
-      author: "Kishan",
-      summary:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-      time: "22:00:00",
-    },
-  ];
-
   const { data: blogs } = await getBlogs();
   // console.log("blogs", blogs);
 
@@ -59,7 +26,6 @@ export default async function Home() {
       <div className="flex-col space-y-16">
         {blogs.map((item, index) => {
           return (
-            // <div >Hello</div>
             <BlogRow
               key={index}
               title={item.title}

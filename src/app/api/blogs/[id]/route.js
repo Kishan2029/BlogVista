@@ -9,8 +9,7 @@ export const GET = async (request, { params }) => {
         await connectDB();
 
         const blog = await Blog.findById(params.id)
-        // console.log("blog", blog)
-        await new Promise(resolve => setTimeout(resolve, 3000));
+
         return new Response(JSON.stringify({
             data: blog, notification: {
                 value: false

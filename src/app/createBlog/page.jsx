@@ -17,25 +17,6 @@ const createBlog = () => {
   const [image, setImage] = useState("");
   const [content, setContent] = useState("");
 
-  // const createBlogFunction = async () => {
-  //   const body = {
-  //     title,
-  //     summary,
-  //     content,
-  //     id: data.user.id,
-  //   };
-  //   console.log("body", body);
-  //   const res = await fetch("/api/blogs", {
-  //     method: "POST",
-  //     body: JSON.stringify(body),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-  //   // revalidateTag("blogs");
-  //   console.log("res", res);
-  // };
-
   const saveBlog = async () => {
     console.log(title, summary, content);
     if (title === "" || summary === "" || content === "") {

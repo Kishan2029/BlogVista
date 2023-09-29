@@ -2,11 +2,12 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const notify = (type, msg) => {
-
+    const position = window.innerWidth < 640 ? "bottom-right" : "top-right";
+    const width = window.innerWidth < 640 ? "bottom-right" : "top-right";
     switch (type) {
         case "success":
             toast.success(msg, {
-                position: "top-right",
+                position: position,
                 autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -17,9 +18,8 @@ export const notify = (type, msg) => {
             });
             break;
         case "error":
-            console.log("here")
             toast.error(msg, {
-                position: "top-right",
+                position: position,
                 autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -31,7 +31,7 @@ export const notify = (type, msg) => {
             break;
         case "info":
             toast.info(msg, {
-                position: "top-right",
+                position: position,
                 autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -43,7 +43,7 @@ export const notify = (type, msg) => {
             break;
         case "warning":
             toast.warn(msg, {
-                position: "top-right",
+                position: position,
                 autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
