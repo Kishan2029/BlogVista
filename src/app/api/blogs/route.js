@@ -21,7 +21,7 @@ export const GET = async (request) => {
 
         })
 
-        console.log("blog api", blogs)
+        // console.log("blog api", blogs)
 
 
         return new Response(JSON.stringify({
@@ -55,7 +55,7 @@ export const POST = async (request) => {
             }), { status: 500 });
 
         const newBlog = new Blog({ title, content, summary, createdBy: id, author: user.name });
-        console.log("newBlog", newBlog)
+        // console.log("newBlog", newBlog)
         await newBlog.save();
         console.log("Blog is created");
         // revalidateTag('blogs')
@@ -72,16 +72,16 @@ export const POST = async (request) => {
 }
 
 export const PUT = async (request) => {
-    console.log("Inside PUT request")
+
     try {
         await connectDB();
 
         const { title, content, summary, coverImage, blogId } = await request.json();
-        console.log("Hello deer")
 
-        console.log("data", title, content, summary, coverImage, blogId)
+
+
         const getBlog = await Blog.findById(blogId);
-        console.log("getBlog", getBlog)
+        // console.log("getBlog", getBlog)
         getBlog.title = title;
         getBlog.content = content;
         getBlog.summary = summary;

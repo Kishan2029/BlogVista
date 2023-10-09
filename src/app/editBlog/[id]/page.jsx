@@ -21,11 +21,11 @@ const fetcher = (url) =>
     }, 4000);
   });
 
-const editBlog = ({ params: { id } }) => {
+const EditBlog = ({ params: { id } }) => {
   // const { data: blogData } = await getBlog(id);
   const { data, error, isLoading } = useSWR(
     `http://localhost:3000/api/blogs/${id}`,
-    fetcher
+    fetcher,
   );
 
   const router = useRouter();
@@ -71,7 +71,7 @@ const editBlog = ({ params: { id } }) => {
         type="text"
         id="title"
         placeholder="Enter title"
-        className="border-2 rounded-md px-2 py-1 w-full border-gray-400"
+        className="w-full rounded-md border-2 border-gray-400 px-2 py-1"
         onChange={(e) => setTitle(e.target.value)}
         value={title}
         maxLength={150}
@@ -80,7 +80,7 @@ const editBlog = ({ params: { id } }) => {
         type="text"
         id="summary"
         placeholder="Enter summary"
-        className="border-2 rounded-md px-2 py-1 w-full border-gray-400"
+        className="w-full rounded-md border-2 border-gray-400 px-2 py-1"
         onChange={(e) => setSummary(e.target.value)}
         value={summary}
         maxLength={350}
@@ -89,7 +89,7 @@ const editBlog = ({ params: { id } }) => {
         type="file"
         id="cover"
         placeholder="Select image"
-        className="border-2 rounded-md px-2 py-1 w-full border-gray-400"
+        className="w-full rounded-md border-2 border-gray-400 px-2 py-1"
       />
       <div>
         <ReactQuill
@@ -102,13 +102,13 @@ const editBlog = ({ params: { id } }) => {
       <div className="h-30 text-white sm:hidden">x</div>
       <div className="flex space-x-6">
         <button
-          className="mt-12 bg-sky-600 px-4 py-2 text-white rounded-md text-md"
+          className="text-md mt-12 rounded-md bg-sky-600 px-4 py-2 text-white"
           onClick={updateBlog}
         >
           Update Blog
         </button>
         <button
-          className="mt-12 bg-red-500 px-4 py-2 text-white rounded-md text-md"
+          className="text-md mt-12 rounded-md bg-red-500 px-4 py-2 text-white"
           onClick={deleteBlog}
         >
           Delete Blog
@@ -118,4 +118,4 @@ const editBlog = ({ params: { id } }) => {
   );
 };
 
-export default editBlog;
+export default EditBlog;

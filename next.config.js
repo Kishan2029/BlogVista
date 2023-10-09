@@ -14,7 +14,8 @@ const nextConfig = {
             topLevelAwait: true,
         }
         return config
-    }
+    },
+
 }
 
 module.exports = nextConfig

@@ -8,7 +8,7 @@ import { revalidateTag } from "next/cache";
 import { createBlogFunction } from "@/actions/serverActions";
 import { notify } from "@/util/notify";
 
-const createBlog = () => {
+const CreateBlog = () => {
   const { data, status } = useSession();
 
   const router = useRouter();
@@ -39,7 +39,7 @@ const createBlog = () => {
         type="text"
         id="title"
         placeholder="Enter title"
-        className="border-2 rounded-md px-2 py-1 w-full border-gray-400"
+        className="w-full rounded-md border-2 border-gray-400 px-2 py-1"
         onChange={(e) => setTitle(e.target.value)}
         maxLength={150}
       />
@@ -47,7 +47,7 @@ const createBlog = () => {
         type="text"
         id="summary"
         placeholder="Enter summary"
-        className="border-2 rounded-md px-2 py-1 w-full border-gray-400"
+        className="w-full rounded-md border-2 border-gray-400 px-2 py-1"
         onChange={(e) => setSummary(e.target.value)}
         maxLength={350}
       />
@@ -55,7 +55,7 @@ const createBlog = () => {
         type="file"
         id="cover"
         placeholder="Select image"
-        className="border-2 rounded-md px-2 py-1 w-full border-gray-400"
+        className="w-full rounded-md border-2 border-gray-400 px-2 py-1"
       />
       <div>
         <ReactQuill
@@ -68,7 +68,7 @@ const createBlog = () => {
       <div className="h-30 text-white sm:hidden">x</div>
       <div className="flex space-x-6">
         <button
-          className="mt-12 bg-sky-600 px-4 py-2 text-white rounded-md text-md"
+          className="text-md mt-12 rounded-md bg-sky-600 px-4 py-2 text-white"
           onClick={saveBlog}
         >
           Save Blog
@@ -78,4 +78,4 @@ const createBlog = () => {
   );
 };
 
-export default createBlog;
+export default CreateBlog;

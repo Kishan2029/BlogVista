@@ -21,7 +21,7 @@ export const GET = async (request, { params }) => {
 }
 
 export const POST = async (request, { params }) => {
-    console.log("detete Blog request")
+
     try {
         await connectDB();
 

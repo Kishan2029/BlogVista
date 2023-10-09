@@ -5,7 +5,7 @@ import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
 
-
+console.log("process.env.NEXTAUTH_SERECT", process.env.NEXTAUTH_SECRET)
 
 const handler = NextAuth({
     providers: [
@@ -45,7 +45,11 @@ const handler = NextAuth({
             return session;
         },
 
-    }
+    },
+    pages: {
+        signIn: "/login"
+    },
+    secret: process.env.NEXTAUTH_SECRET
 })
 
 export { handler as GET, handler as POST }

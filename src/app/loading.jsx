@@ -6,7 +6,10 @@ export default function Loading() {
     <div className="mt-5">
       <div className="flex-col space-y-16">
         {Array.apply(null, { length: 5 }).map((e, i) => (
-          <div className="flex flex-col space-y-4 cursor-pointer sm:flex-row sm:space-y-0  sm:space-x-10">
+          <div
+            key={i}
+            className="flex cursor-pointer flex-col space-y-4 sm:flex-row sm:space-x-10  sm:space-y-0"
+          >
             <div className="basis-2/5">
               <Skeleton height={"15rem"} />
             </div>
@@ -16,16 +19,16 @@ export default function Loading() {
                 <Skeleton />
               </div>
               {/* author and time */}
-              <div className="flex gap-x-6 mt-6 mb-6">
-                <div className="text-sm basis-1/2 ">
+              <div className="mb-6 mt-6 flex gap-x-6">
+                <div className="basis-1/2 text-sm ">
                   <Skeleton />
                 </div>
-                <div className="text-sm basis-1/2">
+                <div className="basis-1/2 text-sm">
                   <Skeleton />
                 </div>
               </div>
               {/* summary */}
-              <div className="text-sm hidden sm:block">
+              <div className="hidden text-sm sm:block">
                 <Skeleton count={4} />
               </div>
             </div>

@@ -15,7 +15,7 @@ async function getBlog(id) {
   return res.json();
 }
 
-const blog = async ({ params: { id } }) => {
+const Blog = async ({ params: { id } }) => {
   // const router = useRouter();
   // const { data: session, status } = useSession();
   const { data } = await getBlog(id);
@@ -23,4 +23,4 @@ const blog = async ({ params: { id } }) => {
   return <SingleBlog data={data} id={id} />;
 };
 
-export default blog;
+export default Blog;

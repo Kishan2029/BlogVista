@@ -19,22 +19,22 @@ const SingleBlog = ({ data, id }) => {
   return (
     <div>
       {/* Title bar */}
-      <div className="text-center mb-5">
-        <div className="text-xl sm:text-3xl font-medium"> {data.title}</div>
-        <div className="text-xs font-normal mt-2 mb-1 text-slate-600">
+      <div className="mb-5 text-center">
+        <div className="text-xl font-medium sm:text-3xl"> {data.title}</div>
+        <div className="mb-1 mt-2 text-xs font-normal text-slate-600">
           {data.createdAt}
         </div>
-        <div className="text-xs font-bold mb-3 text-black">{data.author}</div>
+        <div className="mb-3 text-xs font-bold text-black">{data.author}</div>
         {session !== null && session.user.id === data.createdBy && (
           <div className="flex justify-center">
             <Link href={`/editBlog/${id}`}>
               <button
-                className="flex items-center space-x-2 bg-gray-700 py-2 px-4 rounded-md text-white text-sm"
+                className="flex items-center space-x-2 rounded-md bg-gray-700 px-4 py-2 text-sm text-white"
                 // onClick={() => router.push(`/editBlog/${id}`)}
                 onMouseOver={() => {
                   preload(
                     `http://localhost:3000/api/blogs/${id}`,
-                    editBlogPrefetch
+                    editBlogPrefetch,
                   );
                 }}
               >
@@ -56,7 +56,7 @@ const SingleBlog = ({ data, id }) => {
       />
 
       <div className="mt-6">
-        <div className="mb-6 text-base  text-slate-600 leading-relaxed">
+        <div className="mb-6 text-base  leading-relaxed text-slate-600">
           {/* {ReactHtmlParser(data.content)} */}
           {parse(data.content)}
           {/* <div dangerouslySetInnerHTML={{ __html: data.content }} /> */}
